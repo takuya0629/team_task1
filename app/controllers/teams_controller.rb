@@ -48,8 +48,9 @@ class TeamsController < ApplicationController
   end
 
   def change_owner
-    @team.update(owner_id: assign.user.id)
-    redirect_to teams_url, notice: 'オーナーを変更しました。'
+    @assign = Assign.find(params[:format])
+    @team.update(owner_id: @assign.user.id)
+    redirect_to team_path(@team), notice: 'オーナーを変更しました。'
   end
 
   private
