@@ -50,6 +50,7 @@ class TeamsController < ApplicationController
   def change_owner
     @assign = Assign.find(params[:format])
     @team.update(owner_id: @assign.user.id)
+    ChangeOwnerMailer.change_owner_mail(@assign.user.email).deliver
     redirect_to team_path(@team), notice: 'オーナーを変更しました。'
   end
 
